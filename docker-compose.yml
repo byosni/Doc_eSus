@@ -1,0 +1,24 @@
+services:
+  webserver:
+    container_name: web_piranguinho
+    image: webserver_piranguinho:latest
+    build:
+      context: webserver
+      args:
+        - URL_DOWNLOAD_ESUS="https://arquivos.esusab.ufsc.br/PEC/f10e2821bbbea527ea0220/5.4.7/eSUS-AB-PEC-5.4.7-Linux64.jar"
+        - APP_DB_URL="jdbc:postgresql://172.17.0.1:5432/esus_piranguinho"
+        - APP_DB_USER="piranguinho"
+        - APP_DB_PASSWORD="esus_piranguinho"
+    ports:
+      - '8080:8080'
+    networks:
+      - esus_network
+    healthcheck:
+      test: "curl -f http://localhost:8080"
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+networks:
+  esus_network:
+    driver: bridge
