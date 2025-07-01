@@ -3,9 +3,9 @@ FROM openjdk:17-jdk-bullseye
 #Link para download do instalador versão Linux.
 ARG URL_DOWNLOAD_ESUS="https://arquivos.esusab.ufsc.br/PEC/f10e2821bbbea527ea0220/5.4.7/eSUS-AB-PEC-5.4.7-Linux64.jar"
 #Configurações de conexão com o banco de dados. Por padrão assume que esteja na máquina host
-ARG APP_DB_URL="jdbc:postgresql://177.104.209.59:5432/esus_piranguinho"
-ARG APP_DB_USER="piranguinho"
-ARG APP_DB_PASSWORD="esus_piranguinho"
+ARG APP_DB_URL="jdbc:postgresql://172.17.0.1:5432/esus_cidadeA"
+ARG APP_DB_USER="cidadeA"
+ARG APP_DB_PASSWORD="esus_cidadeA"
 
 RUN echo " Argumentos da build ->  ${APP_DB_URL} - ${APP_DB_USER} - ${APP_DB_PASSWORD}"
 
