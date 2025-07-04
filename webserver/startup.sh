@@ -1,13 +1,15 @@
 #!/bin/sh
 
 file="/opt/e-SUS/webserver/config/application.properties"
-while IFS='=' read -r key value
-do
+while IFS='=' read -r key value; do
     key=$(echo "$key" | xargs | tr '.' '_')
     value=$(echo "$value" | xargs)
-    if [ ${#key} -le 0 ]; then
-      continue
+
+    # Ignora linhas vazias ou com hífens (nomes inválidos no bash)
+    if [ -z "$key" ] || echo "$key" | grep -q -- '-'; then
+        continue
     fi
+
     export "${key}"="${value}"
 done < "$file"
 
